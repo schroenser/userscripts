@@ -9,7 +9,7 @@
 // ==/UserScript==
 
 GM_addStyle(`
-    @media (max-height: 300px) {
+    @media (max-height: 540px) {
 
         /* Top bar */
         #ow3 div.pHsCke {
@@ -36,24 +36,28 @@ GM_addStyle(`
             display: none;
         }
 
-        /* canvas for participants */
-        div[jscontroller=gJYtNe] {
-            inset: 0 !important;
+        .atLQQ {
+            float: left;
+            position: absolute;
+            left: 10px;
+            right: 10px;
+        }
 
-            /*FIXME* /
-            outline: 5px dashed lime !important;
-            outline-offset: -5px;
+        /* canvas for participants */
+        div[jscontroller=izfDQc] {
+            inset: 0 !important;
 
             display: flex !important;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        /* realign each video so that they use the (increased) available screen estate */
-        div[jscontroller=J3CtX] {
+        /*
+         * realign each video inside the canvas so that it use the (increased) available screen estate
+         */
+        div[jscontroller=izfDQc]>div.dkjMxf {
             inset: 0 !important;
             display: block;
-            position: static !important;
 
             flex-basis: auto;
             flex-grow: 1;
@@ -62,9 +66,7 @@ GM_addStyle(`
             width: auto !important;
             height: auto !important;
 
-            /*FIXME* /
-            outline: 5px dashed cyan !important;
-            outline-offset: 0px;/**/
+            position: relative;
         }
 
         xdiv[jscontroller=J3CtX] {
@@ -73,23 +75,49 @@ GM_addStyle(`
             height: 100% !important;
         }
 
-        /* EXPERIMENTAL: Videos first */
+        /*
+         * EXPERIMENTAL: Videos first
+         */
         div[jscontroller=J3CtX][class~=vLRPrf] {
             order: 98;
         }
 
-        /* EXPERIMENTAL: Tiles with "2 others" last */ 
+        /*
+         * EXPERIMENTAL: Tiles with "2 others" last
+         */
         div[data-requested-participant-id="carousel"] {
             order: 99;
             text-transform: uppercase !important;
         }
 
-        /* minimized "you" controls */
-        div[jscontroller="cGKRub"] { opacity: 0.10; }
+        /*
+         * minimized "you" controls
+         */
+        div[jscontroller="cGKRub"] {
+            display: none;
+            /*opacity: 0.10;*/
+        }
+
+        /*
+         * emoji reactions
+         */
+        div[jscontroller="vdCdi"] {
+            position: absolute;
+            top: -20px;
+        }
+
+        div[jscontroller="vdCdi"]>div {
+            background: transparent !important;
+        }
+
     }
 
-    /*** Always - not only for small windows ***/
-
-    /* "You are still sending your video" popup after minimizing the 'you' tile */
-    div[jscontroller="cGKRub"] div[jscontroller="uXcmpd"] { display: none; }
+    /*
+     * emoji reactions don't make much sense in one-on-one meetings (which usually are less wide)
+     */
+    @media (max-width: 500px) {
+        div[jscontroller="vdCdi"]>div {
+            display: none;
+        }
+    }
 `);
