@@ -10,9 +10,11 @@
 function replaceHrefs(nodes) {
     nodes.filter(node => node.hasAttribute("data-id"))
         .map(node => node.querySelector("div > div > article"))
+        .filter(node => node !== null)
         .flatMap(node => {
+        console.log(node);
             return [
-                "header > div > div.ZJdm4 > div.ffqNn > div > div.vGkyT > span > span > a",
+                "header > div > div.ZJdm4 > div.ffqNn > div > div > span > span > a",
                 "header > div > div.ZJdm4 > div.ffqNn > div > div.jOhmG > div.eLzSX > span > span > a",
                 "div.LaNUG > div > div > span > div > div.fAAi8 > div.QkCNg > div.GdjMk > div > div > span > span > a"]
                 .map(selector => node.querySelector(selector))
@@ -20,6 +22,7 @@ function replaceHrefs(nodes) {
         })
         .forEach(a => {
             a.href = "https://cascadr.co/blogs/" + a.innerText;
+            //a.href = "https://www.tumbex.com/" + a.innerText + ".tumblr";
             a.addEventListener("click", e => e.stopPropagation(), { capture: true });
         });
 }
