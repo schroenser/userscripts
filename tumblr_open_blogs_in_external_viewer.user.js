@@ -12,7 +12,6 @@ function replaceHrefs(nodes) {
         .map(node => node.querySelector("div > div > article"))
         .filter(node => node !== null)
         .flatMap(node => {
-        console.log(node);
             return [
                 "header > div > div.ZJdm4 > div.ffqNn > div > div > span > span > a",
                 "header > div > div.ZJdm4 > div.ffqNn > div > div.jOhmG > div.eLzSX > span > span > a",
