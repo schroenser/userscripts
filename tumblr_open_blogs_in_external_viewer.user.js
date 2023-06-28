@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Open Tumblr blog links in external viewer
 // @namespace    https://www.tumblr.com/
-// @version      1.0
+// @version      1.1
 // @description  This will rewrite blog links on Tumblr to be opened in an external viewer.
 // @author       Sven Haberer
 // @match        https://www.tumblr.com/*
@@ -17,9 +17,9 @@ if (window.location.pathname == "/dashboard") {
         .filter(node => node !== null)
         .flatMap(node => {
         return [
-            "header > div > div.ZJdm4 > div.ffqNn > div > div > span > span > a",
-            "header > div > div.ZJdm4 > div.ffqNn > div > div.jOhmG > div.eLzSX > span > span > a",
-            "div.LaNUG > div > div > span > div > div.fAAi8 > div.QkCNg > div.GdjMk > div > div > span > span > a"]
+            "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div > span > span > span > a",
+            "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.jOhmG.vYL8Z > div.eLzSX.vYL8Z > span > span > a",
+            "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a"]
             .map(selector => node.querySelector(selector))
             .filter(node => node);
     });
