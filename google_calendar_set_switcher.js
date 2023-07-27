@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-const menuBarSelector = '#gb > div.gb_qd.gb_kd > div.gb_pd.gb_zd.gb_Ue.gb_Ee.gb_Te.gb_Re.gb_We > div.gb_ge.gb_fe > div > div';
+const menuBarSelector = '#gb > div.gb_vd.gb_pd > div.gb_ud.gb_Ed.gb_0e.gb_Ke.gb_Ze.gb_We.gb_2e > div.gb_le.gb_ke > div > div';
 const calendarListSelector = 'body > div.tEhMVd > div.pSp5K > div.KKOvEb > div.SGWAac > div.QQYuzf > div > div.hEtGGf.HDIIVe.sBn5T > div.qOsM1d.wBon4c > div > div > div > div';
 const calendarSets = [
     {
