@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Open Tumblr blog links in external viewer
 // @namespace    https://www.tumblr.com/
-// @version      1.1
+// @version      1.0
 // @description  This will rewrite blog links on Tumblr to be opened in an external viewer.
 // @author       Sven Haberer
 // @match        https://www.tumblr.com/*
@@ -11,18 +11,19 @@ var selectors;
 var hrefFinder;
 
 if (window.location.pathname == "/dashboard") {
-    selectors = "#base-container > div.D5eCV > div.gPQR5 > div.lSyOz > main > div.j8ha0 > div:nth-child(2)";
+    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0 > div:nth-child(2)";
     hrefFinder = nodes => nodes.filter(node => node.hasAttribute("data-id"))
         .map(node => node.querySelector("div > div > article"))
-        .filter(node => node !== null)
-        .flatMap(node => {
-        return [
-            "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div > span > span > span > a",
-            "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.jOhmG.vYL8Z > div.eLzSX.vYL8Z > span > span > a",
-            "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a"]
-            .map(selector => node.querySelector(selector))
-            .filter(node => node);
-    });
+        .filter(node => node != null)
+        .flatMap(node => 
+            [
+                "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > span > span > span > a",
+                "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.eLzSX.vYL8Z > span > span > a",
+                "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a",
+                "div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.eLzSX.vYL8Z > span > span > a"
+            ].map(selector => node.querySelector(selector))
+             .filter(node => node)
+             .map(node => {console.log(node); return node;}));
 } else if (window.location.pathname == "/following") {
     selectors = "#base-container > div.D5eCV > div.gPQR5 > div.lSyOz > main > section";
     hrefFinder = nodes => nodes.flatMap(node => Array.from(node.querySelectorAll("a")));
