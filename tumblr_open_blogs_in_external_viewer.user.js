@@ -10,22 +10,29 @@
 var selectors;
 var hrefFinder;
 
-if (window.location.pathname == "/dashboard") {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0 > div:nth-child(2)";
-    hrefFinder = nodes => nodes.filter(node => node.hasAttribute("data-id"))
-        .map(node => node.querySelector("div > div > article"))
+if (window.location.pathname.startsWith("/dashboard")) {
+    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0";
+    hrefFinder = nodes => nodes
+        .filter(node => node !== null)
+        .filter(node => node.hasAttribute("data-id"))
+        .map(node => node.querySelector("div > div > div > article"))
         .filter(node => node !== null)
         .flatMap(node =>
                  [
-        "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > span > span > span > a",
+        "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > span > span > a",
         "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.eLzSX.vYL8Z > span > span > a",
         "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a",
-        "div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.eLzSX.vYL8Z > span > span > a"
-    ].map(selector => node.querySelector(selector))
+    ]
+                 .map(selector => node.querySelector(selector))
                  .filter(node => node));
 } else if (window.location.pathname == "/following") {
-    selectors = "#base-container > div.D5eCV > div.gPQR5 > div.lSyOz > main > section";
-    hrefFinder = nodes => nodes.flatMap(node => Array.from(node.querySelectorAll("a")));
+    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > section";
+    hrefFinder = nodes => nodes.flatMap(node => [
+        "a",
+        "div.wmRou > div > a"
+    ]
+                                        .map(selector => node.querySelector(selector))
+                                        .filter(node => node));
 }
 
 var foo = /(?:\/(?!www)([^\/]+)\.tumblr\.com|tumblr.com\/([^\/\n]+))/g;
@@ -44,9 +51,7 @@ function replaceHrefs(nodes) {
 }
 
 var target = document.querySelector(selectors);
-
-var config = { childList: true }
-
+var config = { subtree: true, childList:true }
 
 var observer = new MutationObserver(function (mutations) {
     var nodes = mutations
