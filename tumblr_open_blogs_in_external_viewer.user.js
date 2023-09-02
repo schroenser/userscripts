@@ -11,11 +11,11 @@ var selectors;
 var hrefFinder;
 
 if (window.location.pathname.startsWith("/dashboard")) {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0";
+    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0 > div:nth-child(2)";
     hrefFinder = nodes => nodes
         .filter(node => node !== null)
         .filter(node => node.hasAttribute("data-id"))
-        .map(node => node.querySelector("div > div > div > article"))
+        .map(node => node.querySelector("div > div > article"))
         .filter(node => node !== null)
         .flatMap(node =>
                  [
