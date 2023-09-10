@@ -11,16 +11,16 @@ var selectors;
 var hrefFinder;
 
 if (window.location.pathname.startsWith("/dashboard")) {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > div.j8ha0 > div:nth-child(2)";
+    selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > div.j8ha0";
     hrefFinder = nodes => nodes
         .filter(node => node !== null)
         .filter(node => node.hasAttribute("data-id"))
-        .map(node => node.querySelector("div > div > article"))
+        .map(node => node.querySelector("div > div > div > article"))
         .filter(node => node !== null)
         .flatMap(node =>
                  [
-        "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > span > span > a",
-        "header > div > div.ZJdm4 > div.ffqNn.vYL8Z > div > div.eLzSX.vYL8Z > span > span > a",
+        "header > div.q4Pce.J_Wh8 > div > div.ffqNn.KwsKc > div > span > span > a",
+        "header > div.q4Pce.J_Wh8 > div > div.ffqNn.KwsKc > div > div > span > span > a",
         "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a",
     ]
                  .map(selector => node.querySelector(selector))
