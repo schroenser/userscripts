@@ -13,8 +13,6 @@ var hrefFinder;
 if (window.location.pathname.startsWith("/dashboard")) {
     selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > div.j8ha0";
     hrefFinder = nodes => nodes
-        .filter(node => node !== null)
-        .filter(node => node.hasAttribute("data-id"))
         .map(node => node.querySelector("div > div > div > article"))
         .filter(node => node !== null)
         .flatMap(node =>
@@ -35,12 +33,12 @@ if (window.location.pathname.startsWith("/dashboard")) {
                                         .filter(node => node));
 }
 
-var foo = /(?:\/(?!www)([^\/]+)\.tumblr\.com|tumblr.com\/([^\/\n]+))/g;
+var tumblrUrls = /(?:\/(?!www)([^\/]+)\.tumblr\.com|tumblr.com\/([^\/\n]+))/g;
 
 function replaceHrefs(nodes) {
     hrefFinder(nodes)
         .forEach(a => {
-        var match = [...a.href.matchAll(foo)];
+        var match = [...a.href.matchAll(tumblrUrls)];
         if (match[0]) {
             var blogName = match[0][1] ?? match[0][2]?? match[0][3];
             a.href = "https://cascadr.co/blogs/" + blogName;
@@ -51,7 +49,7 @@ function replaceHrefs(nodes) {
 }
 
 var target = document.querySelector(selectors);
-var config = { subtree: true, childList:true }
+var config = { childList:true, subtree: true }
 
 var observer = new MutationObserver(function (mutations) {
     var nodes = mutations
