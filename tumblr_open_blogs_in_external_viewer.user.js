@@ -17,8 +17,8 @@ if (window.location.pathname.startsWith("/dashboard")) {
         .filter(node => node !== null)
         .flatMap(node =>
                  [
-        "header > div.q4Pce.J_Wh8 > div > div.ffqNn.KwsKc > div > span > span > a",
-        "header > div.q4Pce.J_Wh8 > div > div.ffqNn.KwsKc > div > div > span > span > a",
+        "header > div.q4Pce.J_Wh8 > div > div.ffqNn > div > span > span > a",
+        "header > div.q4Pce.J_Wh8 > div > div.ffqNn > div > div > span > span > a",
         "div.LaNUG > div > div > span > div > div.fAAi8.jLBd9 > div.QkCNg > div.GdjMk > div > div > span > span > span > a",
     ]
                  .map(selector => node.querySelector(selector))
