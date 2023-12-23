@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Open Tumblr blog links in external viewer
 // @namespace    https://www.tumblr.com/
-// @version      1.0
+// @version      1.1
 // @description  This will rewrite blog links on Tumblr to be opened in an external viewer.
 // @author       Sven Haberer
 // @match        https://www.tumblr.com/*
@@ -24,7 +24,7 @@ if (window.location.pathname.startsWith("/dashboard")) {
                  .map(selector => node.querySelector(selector))
                  .filter(node => node));
 } else if (window.location.pathname == "/following") {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk > div > div.lSyOz > main > section";
+    selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > section";
     hrefFinder = nodes => nodes.flatMap(node => [
         "a",
         "div.wmRou > div > a"
