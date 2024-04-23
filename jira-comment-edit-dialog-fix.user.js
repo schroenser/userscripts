@@ -11,4 +11,15 @@
 // ==/UserScript==
 
 GM_addStyle(`
+  #edit-comment {
+    width: 90% !important;
+    height: 90% !important;
+    margin-left: -45% !important;
+    margin-top: -23% !important;
+  }
+
+  #comment-edit > div.form-body {
+    height: auto !important;
+    max-height: 100% !important;
+  }
 `);
