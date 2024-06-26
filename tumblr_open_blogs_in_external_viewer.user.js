@@ -1,17 +1,18 @@
 // ==UserScript==
 // @name         Open Tumblr blog links in external viewer
 // @namespace    https://www.tumblr.com/
-// @version      1.1
+// @version      1.2
 // @description  This will rewrite blog links on Tumblr to be opened in an external viewer.
 // @author       Sven Haberer
 // @match        https://www.tumblr.com/*
 // ==/UserScript==
 
-var selectors;
+document.addEventListener("mouseout", e => e.stopPropagation(), { capture: true });
+
+var selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > div.Evcyl > div.zAlrA";
 var hrefFinder;
 
 if (window.location.pathname.startsWith("/dashboard")) {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > div.j8ha0";
     hrefFinder = nodes => nodes
         .map(node => node.querySelector("div > div > div > article"))
         .filter(node => node !== null)
@@ -24,7 +25,6 @@ if (window.location.pathname.startsWith("/dashboard")) {
                  .map(selector => node.querySelector(selector))
                  .filter(node => node));
 } else if (window.location.pathname == "/following") {
-    selectors = "#base-container > div.D5eCV > div > div._3xgk.ZN00W > div > div.lSyOz.t8f_N > main > section";
     hrefFinder = nodes => nodes.flatMap(node => [
         "a",
         "div.wmRou > div > a"
@@ -61,5 +61,3 @@ var observer = new MutationObserver(function (mutations) {
 observer.observe(target, config);
 
 replaceHrefs(Array.from(target.childNodes));
-
-document.addEventListener("mouseout", e => e.stopPropagation(), { capture: true });
