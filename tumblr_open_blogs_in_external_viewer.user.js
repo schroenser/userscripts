@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Open Tumblr blog links in external viewer
 // @namespace    https://www.tumblr.com/
-// @version      1.5
+// @version      1.6
 // @description  This will rewrite blog links on Tumblr to be opened in an external viewer.
 // @author       Sven Haberer
 // @match        https://www.tumblr.com/*
